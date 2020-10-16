@@ -161,6 +161,10 @@ class UnixTimestamp {
     return new (Timestamp())(this.milliseconds)
   }
 
+  toDuration() {
+    return new Duration(this.milliseconds)
+  }
+
   toDate() {
     return new Date(this.milliseconds)
   }

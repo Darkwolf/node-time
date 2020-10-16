@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/time.cjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Time",
   "main": "./lib/index.js",
   "engines": {

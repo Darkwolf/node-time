@@ -139,6 +139,10 @@ class Timestamp {
     return new UnixTimestamp(options.millis ? this.floatSeconds : this.seconds)
   }
 
+  toDuration() {
+    return new Duration(this.value)
+  }
+
   toDate() {
     return new Date(this.value)
   }
