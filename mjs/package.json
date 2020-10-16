@@ -17,7 +17,8 @@
     "./errors/Error": "./lib/errors/Error.mjs",
     "./errors/InvalidTimestampError": "./lib/errors/InvalidTimestampError.mjs",
     "./Error": "./lib/errors/Error.mjs",
-    "./InvalidTimestampError": "./lib/errors/InvalidTimestampError"
+    "./InvalidTimestampError": "./lib/errors/InvalidTimestampError",
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": ">=12"

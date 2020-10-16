@@ -37,7 +37,7 @@
 #### `static` Time.timestamp()
 * returns: <[Timestamp](#class-timestamp)>
 
-#### `static` Time.unixtimestamp([options])
+#### `static` Time.unixTimestamp([options])
 * `options` <[Object][Object]>
   * `millis` <?[boolean][boolean]> Defaults to `false`.
 * returns: <[UnixTimestamp](#class-unixtimestamp)>
