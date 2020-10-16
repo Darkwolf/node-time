@@ -2,7 +2,10 @@
   "name": "@darkwolf/time.cjs",
   "version": "1.0.0",
   "description": "Time",
-  "main": "./src/index.js",
+  "main": "./lib/index.js",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,10 +15,11 @@
   },
   "keywords": [
     "darkwolf",
+    "dw",
     "time",
     "cjs",
-    "millis",
-    "ms",
+    "timestamp",
+    "unix",
     "builder",
     "converter",
     "formatter"
@@ -25,5 +29,10 @@
   "bugs": {
     "url": "https://github.com/Darkwolf/node-time/issues"
   },
-  "homepage": "https://github.com/Darkwolf/node-time#readme"
+  "homepage": "https://github.com/Darkwolf/node-time#readme",
+  "dependencies": {
+    "@darkwolf/custom-error.cjs": "^1.0.1",
+    "@darkwolf/duration.cjs": "^1.0.1",
+    "@darkwolf/helper.cjs": "^1.0.0"
+  }
 }

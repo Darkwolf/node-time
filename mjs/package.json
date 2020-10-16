@@ -2,7 +2,26 @@
   "name": "@darkwolf/time.mjs",
   "version": "1.0.0",
   "description": "Time",
-  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.mjs",
+    "./": "./lib/",
+    "./types": "./lib/types/index.mjs",
+    "./types/": "./lib/types/",
+    "./types/Timestamp": "./lib/types/Timestamp.mjs",
+    "./types/UnixTimestamp": "./lib/types/UnixTimestamp.mjs",
+    "./Timestamp": "./lib/types/Timestamp.mjs",
+    "./UnixTimestamp": "./lib/types/UnixTimestamp.mjs",
+    "./errors": "./lib/errors/index.mjs",
+    "./errors/": "./lib/errors/",
+    "./errors/Error": "./lib/errors/Error.mjs",
+    "./errors/InvalidTimestampError": "./lib/errors/InvalidTimestampError.mjs",
+    "./Error": "./lib/errors/Error.mjs",
+    "./InvalidTimestampError": "./lib/errors/InvalidTimestampError"
+  },
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,10 +31,11 @@
   },
   "keywords": [
     "darkwolf",
+    "dw",
     "time",
     "mjs",
-    "millis",
-    "ms",
+    "timestamp",
+    "unix",
     "builder",
     "converter",
     "formatter"
@@ -25,5 +45,10 @@
   "bugs": {
     "url": "https://github.com/Darkwolf/node-time/issues"
   },
-  "homepage": "https://github.com/Darkwolf/node-time#readme"
+  "homepage": "https://github.com/Darkwolf/node-time#readme",
+  "dependencies": {
+    "@darkwolf/custom-error.mjs": "^1.0.1",
+    "@darkwolf/duration.mjs": "^1.0.1",
+    "@darkwolf/helper.mjs": "^1.0.0"
+  }
 }
