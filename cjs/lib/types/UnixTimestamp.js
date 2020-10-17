@@ -169,8 +169,9 @@ class UnixTimestamp {
     return new Date(this.milliseconds)
   }
 
-  toString() {
-    return this.toDate().toISOString()
+  toString(options = {}) {
+    const date = this.toDate().toISOString()
+    return options.millis ? date : date.split('.')[0] + 'Z'
   }
 
   valueOf() {

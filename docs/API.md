@@ -211,7 +211,7 @@ Equivalent to <[timestamp.subtractMilliseconds(milliseconds)](#timestampsubtract
 * returns: <[Date][Date]>
 
 #### timestamp.toString()
-* returns: <[string][string]> Date in ISO 8601 format.
+* returns: <[string][string]> Date string in ISO 8601 format. E.g., `'2021-01-01T00:00:00Z'`.
 
 #### timestamp.valueOf()
 * returns: <[number][number]>
@@ -394,8 +394,10 @@ Equivalent to <[unixTimestamp.subtractMilliseconds(milliseconds)](#unixtimestamp
 #### unixTimestamp.toDate()
 * returns: <[Date][Date]>
 
-#### unixTimestamp.toString()
-* returns: <[string][string]> Date in ISO 8601 format.
+#### unixTimestamp.toString([options])
+* `options` <[Object][Object]>
+  * `millis` <?[boolean][boolean]> If `true` will return date string with millisecond fraction. E.g., `'2021-01-01T00:00:00.000Z'`. Defaults to `false`.
+* returns: <[string][string]> Date string in ISO 8601 format. E.g., `'2021-01-01T00:00:00Z'`.
 
 #### unixTimestamp.valueOf()
 * returns: <[number][number]>

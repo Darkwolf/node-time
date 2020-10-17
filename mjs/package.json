@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/time.mjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Time",
   "type": "module",
   "exports": {
