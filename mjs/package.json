@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/time.mjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Time",
   "type": "module",
   "exports": {
@@ -50,6 +50,6 @@
   "dependencies": {
     "@darkwolf/custom-error.mjs": "^1.0.1",
     "@darkwolf/duration.mjs": "^1.0.1",
-    "@darkwolf/helper.mjs": "^1.0.0"
+    "@darkwolf/helper.mjs": "^1.0.4"
   }
 }

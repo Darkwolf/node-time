@@ -4,10 +4,7 @@ import { InvalidTimestampError } from '../errors/index.mjs'
 import Timestamp from './Timestamp.mjs'
 
 export default class UnixTimestamp {
-  static now(options = {}) {
-    const timestamp = Date.now()
-    return options.millis ? Duration.floatSeconds(timestamp) : Duration.seconds(timestamp)
-  }
+  static now = Helper.unix
 
   static parse(timestamp) {
     if (Helper.isString(timestamp)) {
@@ -75,7 +72,7 @@ export default class UnixTimestamp {
   }
 
   setValue(value) {
-    return this.setSeconds(Helper.exists(value) ? UnixTimestamp.parse(value) : UnixTimestamp.now())
+    return this.setSeconds(Helper.exists(value) ? UnixTimestamp.parse(value) : Helper.unix())
   }
 
   setMilliseconds(milliseconds) {

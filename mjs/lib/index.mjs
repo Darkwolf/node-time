@@ -1,3 +1,4 @@
+import Helper from '@darkwolf/helper.mjs'
 import types, {
   Timestamp,
   UnixTimestamp
@@ -17,6 +18,8 @@ export {
 }
 
 export default class Time {
+  static now = Helper.now
+  static unix = Helper.unix
   static types = types
   static Timestamp = Timestamp
   static UnixTimestamp = UnixTimestamp
@@ -24,19 +27,11 @@ export default class Time {
   static Error = Error
   static InvalidTimestampError = InvalidTimestampError
 
-  static now() {
-    return Date.now()
-  }
-
-  static unix(options) {
-    return UnixTimestamp.now(options)
-  }
-
   static timestamp() {
     return new Timestamp()
   }
 
   static unixTimestamp(options) {
-    return new UnixTimestamp(UnixTimestamp.now(options))
+    return new UnixTimestamp(Helper.unix(options))
   }
 }

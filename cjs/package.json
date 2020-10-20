@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/time.cjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Time",
   "main": "./lib/index.js",
   "engines": {
@@ -33,6 +33,6 @@
   "dependencies": {
     "@darkwolf/custom-error.cjs": "^1.0.1",
     "@darkwolf/duration.cjs": "^1.0.1",
-    "@darkwolf/helper.cjs": "^1.0.0"
+    "@darkwolf/helper.cjs": "^1.0.4"
   }
 }

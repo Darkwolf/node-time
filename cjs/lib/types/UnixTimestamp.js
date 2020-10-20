@@ -36,7 +36,7 @@ class UnixTimestamp {
   }
 
   setValue(value) {
-    return this.setSeconds(Helper.exists(value) ? UnixTimestamp.parse(value) : UnixTimestamp.now())
+    return this.setSeconds(Helper.exists(value) ? UnixTimestamp.parse(value) : Helper.unix())
   }
 
   setMilliseconds(milliseconds) {
@@ -186,10 +186,7 @@ class UnixTimestamp {
     return hint === 'string' ? this.toString() : this.valueOf()
   }
 }
-UnixTimestamp.now = (options = {}) => {
-  const timestamp = Date.now()
-  return options.millis ? Duration.floatSeconds(timestamp) : Duration.seconds(timestamp)
-}
+UnixTimestamp.unix = Helper.unix
 UnixTimestamp.parse = timestamp => {
   if (Helper.isString(timestamp)) {
     if (/^\d+(?:\.\d+)?$/.test(timestamp)) {

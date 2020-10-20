@@ -1,3 +1,4 @@
+const Helper = require('@darkwolf/helper.cjs')
 const types = require('./types')
 const errors = require('./errors')
 const {
@@ -10,10 +11,10 @@ const {
 } = errors
 
 class Time {}
-Time.now = () => Date.now()
-Time.unix = options => UnixTimestamp.now(options)
+Time.now = Helper.now
+Time.unix = Helper.unix
 Time.timestamp = () => new Timestamp()
-Time.unixTimestamp = options => new UnixTimestamp(UnixTimestamp.now(options))
+Time.unixTimestamp = options => new UnixTimestamp(Helper.unix(options))
 Time.types = types
 Time.Timestamp = Timestamp
 Time.UnixTimestamp = UnixTimestamp

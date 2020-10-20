@@ -163,7 +163,7 @@ class Timestamp {
     return hint === 'string' ? this.toString() : this.valueOf()
   }
 }
-Timestamp.now = () => Date.now()
+Timestamp.now = Helper.now
 Timestamp.parse = timestamp => {
   if (Helper.isString(timestamp)) {
     if (/^\d+$/.test(timestamp)) {

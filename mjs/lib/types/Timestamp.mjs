@@ -4,9 +4,7 @@ import { InvalidTimestampError } from '../errors/index.mjs'
 import UnixTimestamp from './UnixTimestamp.mjs'
 
 export default class Timestamp {
-  static now() {
-    return Date.now()
-  }
+  static now = Helper.now
 
   static parse(timestamp) {
     if (Helper.isString(timestamp)) {
