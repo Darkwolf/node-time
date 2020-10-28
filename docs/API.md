@@ -4,10 +4,14 @@
 [Object]: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object
 [Date]: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date
 [Duration]: https://github.com/Darkwolf/node-duration/blob/main/docs/API.md
+[Duration.Unit]: https://github.com/Darkwolf/node-duration/blob/main/docs/API.md#class-unit
 [CustomError]: https://github.com/Darkwolf/node-custom-error/blob/main/docs/API.md
 
 # API
 ### class: Time
+#### `static` Time.Duration
+* returns: <[Duration][Duration]>
+
 #### `static` Time.types
 * returns: <[Types](#class-types)>
 
@@ -34,12 +38,20 @@
   * `millis` <?[boolean][boolean]> If `true` will return the current Unix timestamp in seconds with millisecond fraction. Defaults to `false`.
 * returns: <[number][number]>
 
+#### `static` Time.ms(duration)
+* `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* returns: <[number][number]> Milliseconds.
+
+#### `static` Time.sec(duration)
+* `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* returns: <[number][number]> Seconds.
+
 #### `static` Time.timestamp()
 * returns: <[Timestamp](#class-timestamp)>
 
 #### `static` Time.unixTimestamp([options])
 * `options` <[Object][Object]>
-  * `millis` <?[boolean][boolean]> Defaults to `false`.
+  * `millis` <?[boolean][boolean]> If `true` will return the current Unix timestamp in seconds with millisecond fraction. Defaults to `false`.
 * returns: <[UnixTimestamp](#class-unixtimestamp)>
 
 ### class: Types
@@ -74,8 +86,9 @@ Equivalent to <[Timestamp.fromMilliseconds(milliseconds)](#static-timestampfromm
 * `seconds` <[number][number]>
 * returns: <[Timestamp](#class-timestamp)>
 
-#### `init` new Timestamp([value])
-* `value` <[string][string] | [number][number] | [Timestamp](#class-timestamp) | [UnixTimestamp](#class-unixtimestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current timestamp in milliseconds.
+#### `init` new Timestamp([duration[, unit]])
+* `duration` <[string][string] | [number][number] | [Timestamp](#class-timestamp) | [UnixTimestamp](#class-unixtimestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current timestamp in milliseconds.
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>> Must be `'second'` or `'millisecond'`.
 * returns: <[Timestamp](#class-timestamp)>
 
 #### timestamp.value
@@ -98,6 +111,11 @@ Equivalent to <[timestamp.milliseconds](#get-timestampmilliseconds)>
 * `value` <[string][string] | [number][number] | [Timestamp](#class-timestamp) | [UnixTimestamp](#class-unixtimestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current timestamp in milliseconds.
 * returns: <[this](#class-timestamp)>
 
+#### timestamp.set(duration[, unit])
+* `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>> Must be `'second'` or `'millisecond'`.
+* returns: <[this](#class-timestamp)>
+
 #### timestamp.setMilliseconds(milliseconds)
 * `milliseconds` <[number][number]>
 * returns: <[this](#class-timestamp)
@@ -111,8 +129,9 @@ Equivalent to <[timestamp.setMilliseconds(milliseconds)](#timestampsetmillisecon
 * `seconds` <[number][number]>
 * returns: <[this](#class-timestamp)>
 
-#### timestamp.add(duration)
+#### timestamp.add(duration[, unit])
 * `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>>
 * returns: <[this](#class-timestamp)>
 
 #### timestamp.addMilliseconds(milliseconds)
@@ -148,12 +167,17 @@ Equivalent to <[timestamp.addMilliseconds(milliseconds)](#timestampaddmillisecon
 * `months` <[number][number]>
 * returns: <[this](#class-timestamp)>
 
+#### timestamp.addQuarters(quarters)
+* `quarters` <[number][number]>
+* returns: <[this](#class-timestamp)>
+
 #### timestamp.addYears(years)
 * `years` <[number][number]>
 * returns: <[this](#class-timestamp)>
 
-#### timestamp.subtract(duration)
+#### timestamp.subtract(duration[, unit])
 * `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>>
 * returns: <[this](#class-timestamp)>
 
 #### timestamp.subtractMilliseconds(milliseconds)
@@ -189,8 +213,24 @@ Equivalent to <[timestamp.subtractMilliseconds(milliseconds)](#timestampsubtract
 * `months` <[number][number]>
 * returns: <[this](#class-timestamp)>
 
+#### timestamp.subtractQuarters(quarters)
+* `quarters` <[number][number]>
+* returns: <[this](#class-timestamp)>
+
 #### timestamp.subtractYears(years)
 * `years` <[number][number]>
+* returns: <[this](#class-timestamp)>
+
+#### timestamp.abs()
+* returns: <[this](#class-timestamp)>
+
+#### timestamp.ceil()
+* returns: <[this](#class-timestamp)>
+
+#### timestamp.floor()
+* returns: <[this](#class-timestamp)>
+
+#### timestamp.round()
 * returns: <[this](#class-timestamp)>
 
 #### timestamp.reset()
@@ -251,8 +291,9 @@ Equivalent to <[UnixTimestamp.fromMilliseconds(milliseconds)](#static-unixtimest
 * `seconds` <[number][number]>
 * returns: <[UnixTimestamp](#class-unixtimestamp)>
 
-#### `init` new UnixTimestamp([value])
-* `value` <[string][string] | [number][number] | [UnixTimestamp](#class-unixtimestamp) | [Timestamp](#class-timestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current Unix timestamp in seconds.
+#### `init` new UnixTimestamp([duration[, unit]])
+* `duration` <[string][string] | [number][number] | [UnixTimestamp](#class-unixtimestamp) | [Timestamp](#class-timestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current Unix timestamp in seconds.
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>> Must be `'second'` or `'millisecond'`.
 * returns: <[UnixTimestamp](#class-unixtimestamp)>
 
 #### unixTimestamp.value
@@ -275,6 +316,11 @@ Equivalent to <[unixTimestamp.milliseconds](#get-unixtimestampmilliseconds)>
 * `value` <[string][string] | [number][number] | [UnixTimestamp](#class-unixtimestamp) | [Timestamp](#class-timestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current Unix timestamp in seconds.
 * returns: <[this](#class-unixtimestamp)>
 
+#### unixTimestamp.set(duration[, unit])
+* `duration` <[string][string] | [number][number] | [UnixTimestamp](#class-unixtimestamp) | [Timestamp](#class-timestamp) | [Duration][Duration] | [Date][Date]> If the value is `undefined` or `null` will return the current Unix timestamp in seconds.
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>> Must be `'second'` or `'millisecond'`.
+* returns: <[this](#class-unixtimestamp)>
+
 #### unixTimestamp.setMilliseconds(milliseconds)
 * `milliseconds` <[number][number]>
 * returns: <[this](#class-unixtimestamp)
@@ -288,8 +334,9 @@ Equivalent to <[unixTimestamp.setMilliseconds(milliseconds)](#unixtimestampsetmi
 * `seconds` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
-#### unixTimestamp.add(duration)
+#### unixTimestamp.add(duration[, unit])
 * `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>>
 * returns: <[this](#class-unixtimestamp)>
 
 #### unixTimestamp.addMilliseconds(milliseconds)
@@ -317,7 +364,7 @@ Equivalent to <[unixTimestamp.addMilliseconds(milliseconds)](#unixtimestampaddmi
 * `days` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
-#### unixTimestampimestamp.addWeeks(weeks)
+#### unixTimestamp.addWeeks(weeks)
 * `weeks` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
@@ -325,12 +372,17 @@ Equivalent to <[unixTimestamp.addMilliseconds(milliseconds)](#unixtimestampaddmi
 * `months` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
+#### unixTimestampimestamp.addQuarters(quarters)
+* `quarters` <[number][number]>
+* returns: <[this](#class-unixtimestamp)>
+
 #### unixTimestamp.addYears(years)
 * `years` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
-#### unixTimestamp.subtract(duration)
+#### unixTimestamp.subtract(duration[, unit])
 * `duration` <[string][string] | [number][number] | [Duration][Duration]>
+* `unit` <[string][string]<[Duration.Unit][Duration.Unit]>>
 * returns: <[this](#class-unixtimestamp)>
 
 #### unixTimestamp.subtractMilliseconds(milliseconds)
@@ -366,14 +418,21 @@ Equivalent to <[unixTimestamp.subtractMilliseconds(milliseconds)](#unixtimestamp
 * `months` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
+#### unixTimestamp.subtractQuarters(quarters)
+* `quarters` <[number][number]>
+* returns: <[this](#class-unixtimestamp)>
+
 #### unixTimestamp.subtractYears(years)
 * `years` <[number][number]>
 * returns: <[this](#class-unixtimestamp)>
 
-#### unixTimestamp.floor()
+#### unixTimestamp.abs()
 * returns: <[this](#class-unixtimestamp)>
 
 #### unixTimestamp.ceil()
+* returns: <[this](#class-unixtimestamp)>
+
+#### unixTimestamp.floor()
 * returns: <[this](#class-unixtimestamp)>
 
 #### unixTimestamp.round()

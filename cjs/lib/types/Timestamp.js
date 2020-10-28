@@ -2,10 +2,11 @@ const Helper = require('@darkwolf/helper.cjs')
 const Duration = require('@darkwolf/duration.cjs')
 const { InvalidTimestampError } = require('../errors')
 const UnixTimestamp = require('./UnixTimestamp')
+const { Unit } = Duration
 
 class Timestamp {
-  constructor(value) {
-    this.setValue(value)
+  constructor(duration, unit) {
+    this.set(duration, unit)
   }
 
   get milliseconds() {
@@ -32,6 +33,10 @@ class Timestamp {
     return this.setMilliseconds(Helper.exists(value) ? Timestamp.parse(value) : Date.now())
   }
 
+  set(duration, unit) {
+    return unit === Unit.SECOND ? this.setSeconds(duration) : this.setValue(duration)
+  }
+
   setMilliseconds(milliseconds) {
     this.value = milliseconds
     return this
@@ -45,7 +50,35 @@ class Timestamp {
     return this.setMilliseconds(Duration.inSeconds(seconds))
   }
 
-  add(duration) {
+  add(duration, unit) {
+    if (unit) {
+      switch (unit) {
+        case Unit.YEAR: {
+          return this.addYears(duration)
+        }
+        case Unit.QUARTER: {
+          return this.addQuarters(duration)
+        }
+        case Unit.MONTH: {
+          return this.addMonths(duration)
+        }
+        case Unit.WEEK: {
+          return this.addWeeks(duration)
+        }
+        case Unit.DAY: {
+          return this.addDays(duration)
+        }
+        case Unit.HOUR: {
+          return this.addHours(duration)
+        }
+        case Unit.MINUTE: {
+          return this.addMinutes(duration)
+        }
+        case Unit.SECOND: {
+          return this.addSeconds(duration)
+        }
+      }
+    }
     return this.addMilliseconds(Duration.parse(duration))
   }
 
@@ -82,11 +115,43 @@ class Timestamp {
     return this.addMilliseconds(Duration.inMonths(months))
   }
 
+  addQuarters(quarters) {
+    return this.addQuarters(Duration.inQuarters(quarters))
+  }
+
   addYears(years) {
     return this.addMilliseconds(Duration.inYears(years))
   }
 
-  subtract(duration) {
+  subtract(duration, unit) {
+    if (unit) {
+      switch (unit) {
+        case Unit.YEAR: {
+          return this.subtractYears(duration)
+        }
+        case Unit.QUARTER: {
+          return this.subtractQuarters(duration)
+        }
+        case Unit.MONTH: {
+          return this.subtractMonths(duration)
+        }
+        case Unit.WEEK: {
+          return this.subtractWeeks(duration)
+        }
+        case Unit.DAY: {
+          return this.subtractDays(duration)
+        }
+        case Unit.HOUR: {
+          return this.subtractHours(duration)
+        }
+        case Unit.MINUTE: {
+          return this.subtractMinutes(duration)
+        }
+        case Unit.SECOND: {
+          return this.subtractSeconds(duration)
+        }
+      }
+    }
     return this.subtractMilliseconds(Duration.parse(duration))
   }
 
@@ -123,8 +188,32 @@ class Timestamp {
     return this.subtractMilliseconds(Duration.inMonths(months))
   }
 
+  subtractQuarters(quarters) {
+    return this.subtractMilliseconds(Duration.inQuarters(quarters))
+  }
+
   subtractYears(years) {
     return this.subtractMilliseconds(Duration.inYears(years))
+  }
+
+  abs() {
+    this.value = Math.abs(this.value)
+    return this
+  }
+
+  ceil() {
+    this.value = Math.ceil(this.value)
+    return this
+  }
+
+  floor() {
+    this.value = Math.floor(this.value)
+    return this
+  }
+
+  round() {
+    this.value = Math.round(this.value)
+    return this
   }
 
   reset() {

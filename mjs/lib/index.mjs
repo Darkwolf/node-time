@@ -1,4 +1,5 @@
 import Helper from '@darkwolf/helper.mjs'
+import Duration from '@darkwolf/duration.mjs'
 import types, {
   Timestamp,
   UnixTimestamp
@@ -18,8 +19,11 @@ export {
 }
 
 export default class Time {
+  static Duration = Duration
   static now = Helper.now
   static unix = Helper.unix
+  static ms = Duration.ms
+  static sec = Duration.sec
   static types = types
   static Timestamp = Timestamp
   static UnixTimestamp = UnixTimestamp

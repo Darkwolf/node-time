@@ -1,5 +1,5 @@
 import Helper from '@darkwolf/helper.mjs'
-import Duration from '@darkwolf/duration.mjs'
+import Duration, { Unit } from '@darkwolf/duration.mjs'
 import { InvalidTimestampError } from '../errors/index.mjs'
 import Timestamp from './Timestamp.mjs'
 
@@ -20,9 +20,9 @@ export default class UnixTimestamp {
       }
     } else if (Helper.isNumber(timestamp)) {
       return timestamp
-    } else if (timestamp instanceof UnixTimestamp || timestamp instanceof Duration) {
+    } else if (timestamp instanceof UnixTimestamp) {
       return timestamp.value
-    } else if (timestamp instanceof Timestamp) {
+    } else if (timestamp instanceof Timestamp || timestamp instanceof Duration) {
       return timestamp.floatSeconds
     } else if (timestamp instanceof Date) {
       return Duration.floatSeconds(timestamp.getTime())
@@ -47,8 +47,8 @@ export default class UnixTimestamp {
     return new UnixTimestamp(seconds)
   }
 
-  constructor(value) {
-    this.setValue(value)
+  constructor(duration, unit) {
+    this.set(duration, unit)
   }
 
   get milliseconds() {
@@ -75,6 +75,10 @@ export default class UnixTimestamp {
     return this.setSeconds(Helper.exists(value) ? UnixTimestamp.parse(value) : Helper.unix())
   }
 
+  set(duration, unit) {
+    return unit === Unit.MILLISECOND ? this.setMilliseconds(duration) : this.setValue(duration)
+  }
+
   setMilliseconds(milliseconds) {
     return this.setSeconds(Duration.floatSeconds(milliseconds))
   }
@@ -88,8 +92,36 @@ export default class UnixTimestamp {
     return this
   }
 
-  add(duration) {
-    return this.addMilliseconds(Duration.parse(duration))
+  add(duration, unit) {
+    if (unit) {
+      switch (unit) {
+        case Unit.YEAR: {
+          return this.addYears(duration)
+        }
+        case Unit.QUARTER: {
+          return this.addQuarters(duration)
+        }
+        case Unit.MONTH: {
+          return this.addMonths(duration)
+        }
+        case Unit.WEEK: {
+          return this.addWeeks(duration)
+        }
+        case Unit.DAY: {
+          return this.addDays(duration)
+        }
+        case Unit.HOUR: {
+          return this.addHours(duration)
+        }
+        case Unit.MINUTE: {
+          return this.addMinutes(duration)
+        }
+        case Unit.MILLISECOND: {
+          return this.addMilliseconds(duration)
+        }
+      }
+    }
+    return Helper.isNumber(duration) ? this.addSeconds(duration) : this.addMilliseconds(Duration.parse(duration))
   }
 
   addMilliseconds(milliseconds) {
@@ -125,12 +157,44 @@ export default class UnixTimestamp {
     return this.addMilliseconds(Duration.inMonths(months))
   }
 
+  addQuarters(quarters) {
+    return this.addMilliseconds(Duration.inQuarters(quarters))
+  }
+
   addYears(years) {
     return this.addMilliseconds(Duration.inYears(years))
   }
 
-  subtract(duration) {
-    return this.subtractMilliseconds(Duration.parse(duration))
+  subtract(duration, unit) {
+    if (unit) {
+      switch (unit) {
+        case Unit.YEAR: {
+          return this.subtractYears(duration)
+        }
+        case Unit.QUARTER: {
+          return this.subtractQuarters(duration)
+        }
+        case Unit.MONTH: {
+          return this.subtractMonths(duration)
+        }
+        case Unit.WEEK: {
+          return this.subtractWeeks(duration)
+        }
+        case Unit.DAY: {
+          return this.subtractDays(duration)
+        }
+        case Unit.HOUR: {
+          return this.subtractHours(duration)
+        }
+        case Unit.MINUTE: {
+          return this.subtractMinutes(duration)
+        }
+        case Unit.MILLISECOND: {
+          return this.subtractMilliseconds(duration)
+        }
+      }
+    }
+    return Helper.isNumber(duration) ? this.subtractSeconds(duration) : this.subtractMilliseconds(Duration.parse(duration))
   }
 
   subtractMilliseconds(milliseconds) {
@@ -166,17 +230,26 @@ export default class UnixTimestamp {
     return this.subtractMilliseconds(Duration.inMonths(months))
   }
 
+  subtractQuarters(quarters) {
+    return this.subtractMilliseconds(Duration.inQuarters(quarters))
+  }
+
   subtractYears(years) {
     return this.subtractMilliseconds(Duration.inYears(years))
   }
 
-  floor() {
-    this.value = Math.floor(this.value)
+  abs() {
+    this.value = Math.abs(this.value)
     return this
   }
 
   ceil() {
     this.value = Math.ceil(this.value)
+    return this
+  }
+
+  floor() {
+    this.value = Math.floor(this.value)
     return this
   }
 

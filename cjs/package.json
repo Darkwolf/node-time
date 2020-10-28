@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/time.cjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Time",
   "main": "./lib/index.js",
   "engines": {
@@ -32,7 +32,7 @@
   "homepage": "https://github.com/Darkwolf/node-time#readme",
   "dependencies": {
     "@darkwolf/custom-error.cjs": "^1.0.1",
-    "@darkwolf/duration.cjs": "^1.0.1",
-    "@darkwolf/helper.cjs": "^1.0.4"
+    "@darkwolf/duration.cjs": "^1.0.3",
+    "@darkwolf/helper.cjs": "^1.0.5"
   }
 }
